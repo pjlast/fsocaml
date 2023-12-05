@@ -38,3 +38,9 @@ dune exec myproject -w
 ```
 
 This will start the server with reloading enabled. Whenever you change a source file, the project will be recompiled and executed.
+
+## About
+
+This project is heavily inspired by Elixir Phoenix/Ruby on Rails. It also follows the same Model View Controller (MVC) setup and the "convention over configuration" mindset. The idea is that adding features to your project should be a no-brainer. Database access functions go into `lib/models`, HTML rendering goes into `lib/views`, routing goes into `lib/router.ml`, the handling of routes goes into `lib/controllers`.
+
+Hopefully this eliminates the decision fatigue around the trivial stuff, and lets you focus on simply building what you want to build.
