@@ -4,14 +4,18 @@
 
 # FSOCaml
 
-This is an opinionated template repository to get up and running with a full-stack OCaml web application.
+This is an opinionated template repository to get up and running with a full-stack OCaml web application. It's basically just Dream, but with some pre-configured setup to take some of the thought out of it.
 
 ## TODO
 
 - [x] Figure out a pattern for routing
+  - Separate file for routing in `lib/router.ml`. Keeps all the application code in `lib/`. Call out to controllers to handle routs. No code in the router itself.
 - [x] Figure out a pattern for HTML templating
+  - Settled on simply using the Dream .eml templates. Not a big fan of the tooling around it. Currently using .html extension so that the LSP doesn't shout at me.
 - [ ] Figure out a pattern for database interactions
+  - Will probably use Petrol with some adjustments.
 - [ ] Figure out a pattern for database migrations
+  - This one is a bit annoying. Petrol's migration pattern sucks. A lot.
 - [ ] Figure out a testing strategy
 - [ ] Automate project naming?
 

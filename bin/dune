@@ -1,4 +1,4 @@
 (executable
  (public_name fsocaml)
  (name main)
- (libraries fsocaml base dream caqti-driver-postgresql))
+ (libraries fsocaml base dream caqti-driver-postgresql lwt))
