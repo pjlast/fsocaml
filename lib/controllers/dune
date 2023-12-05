@@ -1,0 +1,5 @@
+(library
+ (name controllers)
+ (libraries dream tyxml utils views)
+ (preprocess
+  (pps tyxml-ppx)))

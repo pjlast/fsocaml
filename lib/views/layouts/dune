@@ -1,0 +1,5 @@
+(library
+ (name layouts)
+ (libraries dream tyxml)
+ (preprocess
+  (pps tyxml-ppx)))
