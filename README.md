@@ -8,8 +8,8 @@ This is an opinionated template repository to get up and running with a full-sta
 
 ## TODO
 
-- [v] Figure out a pattern for routing
-- [v] Figure out a pattern for HTML templating
+- [x] Figure out a pattern for routing
+- [x] Figure out a pattern for HTML templating
 - [ ] Figure out a pattern for database interactions
 - [ ] Figure out a pattern for database migrations
 - [ ] Figure out a testing strategy
