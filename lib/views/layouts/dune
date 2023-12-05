@@ -1,5 +1,15 @@
 (library
  (name layouts)
- (libraries dream tyxml)
- (preprocess
-  (pps tyxml-ppx)))
+ (libraries dream))
+
+(rule
+ (targets app.ml)
+ (deps app.eml.html)
+ (action
+  (run dream_eml %{deps} --workspace %{workspace_root})))
+
+(rule
+ (targets root.ml)
+ (deps root.eml.html)
+ (action
+  (run dream_eml %{deps} --workspace %{workspace_root})))

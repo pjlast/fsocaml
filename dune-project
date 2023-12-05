@@ -19,7 +19,7 @@
  (name fsocaml)
  (synopsis "A short synopsis")
  (description "A longer description")
- (depends ocaml dune dream tyxml tyxml-ppx petrol)
+ (depends ocaml dune dream petrol)
  (tags
   (topics "to describe" your project)))
 

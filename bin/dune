@@ -1,6 +1,4 @@
 (executable
  (public_name fsocaml)
  (name main)
- (libraries fsocaml base dream tyxml caqti-driver-postgresql)
- (preprocess
-  (pps tyxml-ppx)))
+ (libraries fsocaml base dream caqti-driver-postgresql))

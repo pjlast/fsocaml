@@ -13,8 +13,6 @@ depends: [
   "ocaml"
   "dune" {>= "3.11"}
   "dream"
-  "tyxml"
-  "tyxml-ppx"
   "petrol"
   "odoc" {with-doc}
 ]

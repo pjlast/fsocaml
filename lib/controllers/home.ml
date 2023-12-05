@@ -1,1 +1,1 @@
-let index req = Utils.render_page (Views.Home.render req)
+let index req = Dream.html (Layouts.Root.render req Views.Home.render)

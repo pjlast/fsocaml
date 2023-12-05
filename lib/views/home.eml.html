@@ -1,11 +1,5 @@
-open Tyxml
-
-let result =
-  [%html
-    {|
-    <div class="left-[40rem] fixed inset-y-0 right-0 z-0 hidden lg:block xl:left-[50rem]">|}
-      [ Html.Unsafe.data
-          {|
+let render =
+<div class="left-[40rem] fixed inset-y-0 right-0 z-0 hidden lg:block xl:left-[50rem]">
   <svg
     viewBox="0 0 1480 957"
     fill="none"
@@ -42,9 +36,7 @@ let result =
       fill="#A41C42"
       fill-opacity=".2"
     />
-  </svg>|}
-      ]
-      {|
+  </svg>
 </div>
 <div class="px-4 py-10 sm:px-6 sm:py-28 lg:px-8 xl:px-28 xl:py-32">
   <div class="mx-auto max-w-xl lg:mx-0">
@@ -67,9 +59,7 @@ let result =
           >
             <span class="absolute inset-0 rounded-2xl bg-zinc-50 transition group-hover:bg-zinc-100 sm:group-hover:scale-105">
             </span>
-            <span class="relative flex items-center gap-4 sm:flex-col">|}
-      [ Html.Unsafe.data
-          {|
+            <span class="relative flex items-center gap-4 sm:flex-col">
               <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" class="h-6 w-6">
                 <path d="m12 4 10-2v18l-10 2V4Z" fill="#18181B" fill-opacity=".15" />
                 <path
@@ -79,9 +69,7 @@ let result =
                   stroke-linecap="round"
                   stroke-linejoin="round"
                 />
-              </svg>|}
-      ]
-      {|
+              </svg>
               Guides &amp; Docs
             </span>
           </a>
@@ -91,9 +79,7 @@ let result =
           >
             <span class="absolute inset-0 rounded-2xl bg-zinc-50 transition group-hover:bg-zinc-100 sm:group-hover:scale-105">
             </span>
-            <span class="relative flex items-center gap-4 sm:flex-col">|}
-      [ Html.Unsafe.data
-          {|
+            <span class="relative flex items-center gap-4 sm:flex-col">
               <svg viewBox="0 0 24 24" aria-hidden="true" class="h-6 w-6">
                 <path
                   fill-rule="evenodd"
@@ -101,9 +87,7 @@ let result =
                   d="M12 0C5.37 0 0 5.506 0 12.303c0 5.445 3.435 10.043 8.205 11.674.6.107.825-.262.825-.585 0-.292-.015-1.261-.015-2.291C6 21.67 5.22 20.346 4.98 19.654c-.135-.354-.72-1.446-1.23-1.738-.42-.23-1.02-.8-.015-.815.945-.015 1.62.892 1.845 1.261 1.08 1.86 2.805 1.338 3.495 1.015.105-.8.42-1.338.765-1.645-2.67-.308-5.46-1.37-5.46-6.075 0-1.338.465-2.446 1.23-3.307-.12-.308-.54-1.569.12-3.26 0 0 1.005-.323 3.3 1.26.96-.276 1.98-.415 3-.415s2.04.139 3 .416c2.295-1.6 3.3-1.261 3.3-1.261.66 1.691.24 2.952.12 3.26.765.861 1.23 1.953 1.23 3.307 0 4.721-2.805 5.767-5.475 6.075.435.384.81 1.122.81 2.276 0 1.645-.015 2.968-.015 3.383 0 .323.225.707.825.585a12.047 12.047 0 0 0 5.919-4.489A12.536 12.536 0 0 0 24 12.304C24 5.505 18.63 0 12 0Z"
                   fill="#18181B"
                 />
-              </svg>|}
-      ]
-      {|
+              </svg>
               Source Code
             </span>
           </a>
@@ -113,9 +97,7 @@ let result =
           >
             <span class="absolute inset-0 rounded-2xl bg-zinc-50 transition group-hover:bg-zinc-100 sm:group-hover:scale-105">
             </span>
-            <span class="relative flex items-center gap-4 sm:flex-col">|}
-      [ Html.Unsafe.data
-          {|
+            <span class="relative flex items-center gap-4 sm:flex-col">
               <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" class="h-6 w-6">
                 <path
                   d="M12 1v6M12 17v6"
@@ -135,9 +117,7 @@ let result =
                   stroke-linecap="round"
                   stroke-linejoin="round"
                 />
-              </svg>|}
-      ]
-      {|
+              </svg>
               Changelog
             </span>
           </a>
@@ -148,22 +128,17 @@ let result =
               href="https://twitter.com/elixirphoenix"
               class="group -mx-2 -my-0.5 inline-flex items-center gap-3 rounded-lg px-2 py-0.5 hover:bg-zinc-50 hover:text-zinc-900"
             >
-              |}
-      [ Html.Unsafe.data
-          {|<svg
+          <svg
                 viewBox="0 0 16 16"
                 aria-hidden="true"
                 class="h-4 w-4 fill-zinc-400 group-hover:fill-zinc-600"
               >
                 <path d="M5.403 14c5.283 0 8.172-4.617 8.172-8.62 0-.131 0-.262-.008-.391A6.033 6.033 0 0 0 15 3.419a5.503 5.503 0 0 1-1.65.477 3.018 3.018 0 0 0 1.263-1.676 5.579 5.579 0 0 1-1.824.736 2.832 2.832 0 0 0-1.63-.916 2.746 2.746 0 0 0-1.821.319A2.973 2.973 0 0 0 8.076 3.78a3.185 3.185 0 0 0-.182 1.938 7.826 7.826 0 0 1-3.279-.918 8.253 8.253 0 0 1-2.64-2.247 3.176 3.176 0 0 0-.315 2.208 3.037 3.037 0 0 0 1.203 1.836A2.739 2.739 0 0 1 1.56 6.22v.038c0 .7.23 1.377.65 1.919.42.54 1.004.912 1.654 1.05-.423.122-.866.14-1.297.052.184.602.541 1.129 1.022 1.506a2.78 2.78 0 0 0 1.662.598 5.656 5.656 0 0 1-2.007 1.074A5.475 5.475 0 0 1 1 12.64a7.827 7.827 0 0 0 4.403 1.358" />
-              </svg>|}
-      ]
-      {|
+              </svg>
               Follow on Twitter
             </a>
-          </div>|}
-      [ Html.Unsafe.data
-          {|<div>
+          </div>
+          <div>
             <a
               href="https://elixirforum.com"
               class="group -mx-2 -my-0.5 inline-flex items-center gap-3 rounded-lg px-2 py-0.5 hover:bg-zinc-50 hover:text-zinc-900"
@@ -232,14 +207,8 @@ let result =
               Deploy your application
             </a>
           </div>
-          |}
-      ]
-      {|
         </div>
       </div>
     </div>
   </div>
 </div>
-|}]
-
-let render req = result |> Layouts.Root.render req
