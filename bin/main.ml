@@ -6,4 +6,4 @@ let () =
   @@ Dream.logger
   @@ Dream.sql_pool ~size:Config.sql_pool_size Config.sql_url
   @@ Dream.memory_sessions
-  @@ Dream.router Fsocaml.Router.router
+  @@ Dream.router Allo.Router.router

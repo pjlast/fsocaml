@@ -1,6 +1,6 @@
 (lang dune 3.11)
 
-(name fsocaml)
+(name allo)
 
 (generate_opam_files true)
 
@@ -16,7 +16,7 @@
 (documentation https://url/to/documentation)
 
 (package
- (name fsocaml)
+ (name allo)
  (synopsis "A short synopsis")
  (description "A longer description")
  (depends ocaml dune dream tyxml tyxml-ppx petrol)
