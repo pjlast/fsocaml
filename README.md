@@ -1,4 +1,6 @@
-![allo logo](https://github.com/pjlast/allo/blob/main/assets/images/logo.png?raw=true)
+<div align="center">
+  <img alt="allo logo" src="https://github.com/pjlast/allo/blob/main/assets/images/logo.png?raw=true" width="250" />
+</div>
 
 # Allo
 
