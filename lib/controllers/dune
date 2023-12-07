@@ -1,3 +1,4 @@
 (library
  (name controllers)
- (libraries dream views))
+ (libraries dream views ppx_dream_eml)
+ (preprocess (pps ppx_dream_eml)))

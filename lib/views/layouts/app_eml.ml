@@ -1,4 +1,5 @@
 let render content =
+  {%eml|
 <header class="px-4 sm:px-6 lg:px-8">
   <div class="flex items-center justify-between border-b border-zinc-100 py-3 text-sm">
     <div class="flex items-center gap-4">
@@ -30,3 +31,4 @@ let render content =
       <%s! content %>
   </div>
 </main>
+|}

@@ -4,7 +4,10 @@
 
 (rule
  (target tailwindcss.ml)
- (deps ../assets/tailwind.css ../assets/tailwind.config.js (glob_files %{project_root}/lib/views/**.eml.html))
+ (deps
+  ../assets/tailwind.css
+  ../assets/tailwind.config.js
+  (glob_files %{project_root}/lib/views/*_eml.ml))
  (action
   (with-stdout-to
    %{null}

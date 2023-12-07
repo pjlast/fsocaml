@@ -1,4 +1,5 @@
 let render =
+    {%eml|
 <div class="left-[40rem] fixed inset-y-0 right-0 z-0 hidden lg:block xl:left-[50rem]">
   <svg
     viewBox="0 0 1480 957"
@@ -212,3 +213,4 @@ let render =
     </div>
   </div>
 </div>
+|}

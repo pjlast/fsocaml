@@ -1,9 +1,4 @@
 (library
  (name views)
- (libraries dream layouts))
-
-(rule
- (targets home.ml)
- (deps home.eml.html)
- (action
-  (run dream_eml %{deps} --workspace %{workspace_root})))
+ (libraries dream layouts)
+ (preprocess (pps ppx_dream_eml)))

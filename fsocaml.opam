@@ -14,6 +14,7 @@ depends: [
   "dune" {>= "3.11"}
   "dream"
   "petrol"
+  "ppx_dream_eml"
   "odoc" {with-doc}
 ]
 build: [

@@ -1,15 +1,5 @@
 (library
  (name layouts)
- (libraries dream))
-
-(rule
- (targets app.ml)
- (deps app.eml.html)
- (action
-  (run dream_eml %{deps} --workspace %{workspace_root})))
-
-(rule
- (targets root.ml)
- (deps root.eml.html)
- (action
-  (run dream_eml %{deps} --workspace %{workspace_root})))
+ (libraries dream)
+ (preprocess
+  (pps ppx_dream_eml)))

@@ -3,7 +3,7 @@
 
 module.exports = {
   content: [
-    "./**/*.eml.html"
+    "./**/*_eml.ml"
   ],
   theme: {
     extend: {
