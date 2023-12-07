@@ -21,7 +21,20 @@ This is an opinionated template repository to get up and running with a full-sta
 
 ## Getting started
 
-To get started, simply clone this repository and remove the `.git` folder. E.g. if you want to create a project named `myproject`, run the following command:
+### Dependencies
+
+First things first: this project uses a [fork](https://github.com/pjlast/petrol) of a [fork](https://github.com/tjdevries/petrol) of [Petrol](https://github.com/Gopiandcode/petrol). This might get consolidated at some point, but I wanted to iterate fast, so I found it easier to just fork the repo. So you'll first need to clone and install the fork:
+
+```bash
+git clone https://github.com/pjlast/petrol.git
+cd petrol
+dune build
+opam install .
+```
+
+### Setup
+
+Next, clone this repository and remove the `.git` folder. E.g. if you want to create a project named `myproject`, run the following command:
 
 ```bash
 git clone --depth=1 --branch=main git@github.com:pjlast/fsocaml.git myproject
