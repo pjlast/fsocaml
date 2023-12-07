@@ -64,17 +64,17 @@ let migrate_down_all () =
 let () =
   Clap.description "Manage database migrations";
 
-  let new_section = Clap.section "NEW OPTIONS" in
-
   let command =
     Clap.subcommand
       [
         ( Clap.case "new" ~description:"Create a new migration" @@ fun () ->
           let migration_name =
-            Clap.mandatory_string ~section:new_section
-              ~placeholder:"MIGRATION_NAME" ()
+            Clap.mandatory_string ~placeholder:"MIGRATION_NAME" ()
           in
-          `new_migration migration_name );
+          if migration_name |> String.equal "" then
+            `error
+          else
+            `new_migration migration_name );
         (Clap.case "up" ~description:"Run all up migrations" @@ fun () -> `up);
         ( Clap.case "down" ~description:"Run all down migrations" @@ fun () ->
           `down );
@@ -85,3 +85,4 @@ let () =
       Stdio.print_endline ("Migration create at " ^ new_migration name)
   | `up -> migrate_up_all ()
   | `down -> migrate_down_all ()
+  | `error -> Clap.help ~out:Stdio.print_string ()

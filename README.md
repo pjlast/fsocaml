@@ -12,10 +12,10 @@ This is an opinionated template repository to get up and running with a full-sta
   - Separate file for routing in `lib/router.ml`. Keeps all the application code in `lib/`. Call out to controllers to handle routs. No code in the router itself.
 - [x] Figure out a pattern for HTML templating
   - Settled on simply using the Dream .eml templates. Not a big fan of the tooling around it. Currently using .html extension so that the LSP doesn't shout at me.
-- [ ] Figure out a pattern for database interactions
+- [x] Figure out a pattern for database interactions
   - Will probably use Petrol with some adjustments.
-- [ ] Figure out a pattern for database migrations
-  - This one is a bit annoying. Petrol's migration pattern sucks. A lot.
+- [x] Figure out a pattern for database migrations
+  - Went with a custom CLI tool
 - [ ] Figure out a testing strategy
 - [ ] Automate project naming?
 
@@ -48,3 +48,26 @@ This will start the server with reloading enabled. Whenever you change a source 
 This project is heavily inspired by Elixir Phoenix/Ruby on Rails. It also follows the same Model View Controller (MVC) setup and the "convention over configuration" mindset. The idea is that adding features to your project should be a no-brainer. Database access functions go into `lib/models`, HTML rendering goes into `lib/views`, routing goes into `lib/router.ml`, the handling of routes goes into `lib/controllers`.
 
 Hopefully this eliminates the decision fatigue around the trivial stuff, and lets you focus on simply building what you want to build.
+
+## Database migrations
+
+FSOCaml has a CLI tool to manage database migrations.
+
+
+To create a new migration:
+
+```bash
+dune exec migrate new 'your migration name'
+```
+
+To run all upward migrations:
+
+```bash
+dune exec migrate up
+```
+
+To run all downward migrations:
+
+```bash
+dune exec migrate down
+```
