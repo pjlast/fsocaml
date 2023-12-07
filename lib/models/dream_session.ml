@@ -39,7 +39,7 @@ module User_session = struct
 end
 
 let x db =
-  Petrol.transact db (fun () ->
+  Db.transact db (fun () ->
       let open Query in
       let qry =
         select [ User_session.id; User.name ] ~from:User_session.t
