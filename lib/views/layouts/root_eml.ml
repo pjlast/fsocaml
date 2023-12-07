@@ -1,13 +1,3 @@
-let greet names =
-  {%eml|
-    <h1>Hello!</h1>
-    <ul>
-    <% names |> List.iter (fun name -> %>
-        <li><%s name %></li>
-    <% ); %>
-    </ul>
-  |}
-
 let render req content =
   {%eml|
 <!DOCTYPE html>

@@ -1,2 +1,11 @@
-profile = ocamlformat
 version = 0.26.1
+
+margin = 80
+doc-comments = before
+exp-grouping = preserve
+break-infix = fit-or-vertical
+wrap-comments = true
+parse-docstrings = true
+if-then-else = k-r
+break-cases = all
+sequence-blank-line = preserve-one

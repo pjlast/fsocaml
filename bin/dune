@@ -1,4 +1,11 @@
 (executable
  (public_name fsocaml)
  (name main)
- (libraries fsocaml base dream caqti-driver-postgresql))
+ (modules main)
+ (libraries fsocaml fsoconf base stdio dream caqti-driver-postgresql caqti-lwt petrol models db))
+
+(executable
+  (public_name migrate)
+  (name migrate)
+  (modules migrate)
+  (libraries fsocaml fsoconf clap base core core_unix stdio caqti-driver-postgresql))

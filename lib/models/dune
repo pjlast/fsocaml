@@ -1,0 +1,4 @@
+(library
+ (name models)
+ (libraries dream petrol db)
+ (preprocess (pps lwt_ppx)))
