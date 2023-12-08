@@ -1,1 +1,4 @@
-let index req = Dream.html (Layouts.Root_eml.render req Views.Home_eml.render)
+let index req =
+  Dream.html
+    (Views.Home_eml.render
+    |> Layouts.Root_eml.render req)
