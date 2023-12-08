@@ -61,6 +61,27 @@ let migrate_down_all () =
          | Ok () -> Stdio.print_endline ("Ran down migration " ^ file)
          | Error err -> Stdio.print_endline (Caqti_error.show err))
 
+let create_db () =
+  let fn =
+    let sql =
+      Stdlib.Format.sprintf {|CREATE DATABASE %s;|}
+        Fsoconf.db_params.database
+    in
+    let open Lwt_result.Syntax in
+    let open Caqti_request.Infix in
+    let q = (Caqti_type.unit ->. Caqti_type.unit) sql in
+    let connection_uri =
+      Fsoconf.conn_url ~with_db:false Fsoconf.db_params |> Uri.of_string
+    in
+    let* (module DB : Caqti_lwt.CONNECTION) =
+      Caqti_lwt.connect connection_uri
+    in
+    DB.exec q ()
+  in
+  match Lwt_main.run fn with
+  | Ok () -> Stdio.print_endline "Database created"
+  | Error err -> Stdio.print_endline (Caqti_error.show err)
+
 let () =
   Clap.description "Manage database migrations";
 
@@ -78,6 +99,9 @@ let () =
         (Clap.case "up" ~description:"Run all up migrations" @@ fun () -> `up);
         ( Clap.case "down" ~description:"Run all down migrations" @@ fun () ->
           `down );
+        ( Clap.case "create"
+            ~description:"Create the database specified in the config"
+        @@ fun () -> `create );
       ]
   in
   match command with
@@ -85,4 +109,5 @@ let () =
       Stdio.print_endline ("Migration create at " ^ new_migration name)
   | `up -> migrate_up_all ()
   | `down -> migrate_down_all ()
+  | `create -> create_db ()
   | `error -> Clap.help ~out:Stdio.print_string ()

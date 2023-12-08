@@ -32,9 +32,15 @@ let db_params =
     pool_size = 10;
   }
 
-let conn_url params =
-  Stdlib.Format.sprintf "postgresql://%s:%s@%s/%s" params.username
-    params.password params.hostname params.database
+let conn_url ?(with_db = true) params =
+  let out =
+    Stdlib.Format.sprintf "postgresql://%s:%s@%s" params.username
+      params.password params.hostname
+  in
+  if with_db then
+    out ^ "/" ^ params.database
+  else
+    out
 
 (** If FSO_HOST is set, it is used as the IP address of your application.
     Otherwise defaults to localhost. *)
