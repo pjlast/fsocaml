@@ -1,3 +1,19 @@
+(rule
+ (alias tailwind)
+ (deps
+   ../assets/tailwind.css
+   ../assets/tailwind.config.js
+   (glob_files ${project_root}/lib/views/*_eml.ml))
+ (action (run
+     npx
+     tailwindcss
+     -c
+     ../assets/tailwind.config.js
+     -i
+     ../assets/tailwind.css
+     -o
+     ../assets/css/app.css)))
+
 (executable
  (public_name fsocaml)
  (name main)

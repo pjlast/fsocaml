@@ -1,25 +1,4 @@
 (library
  (name fsocaml)
- (modules router tailwindcss)
+ (modules router)
  (libraries dream controllers views))
-
-(rule
- (target tailwindcss.ml)
- (deps
-  ../assets/tailwind.css
-  ../assets/tailwind.config.js
-  (glob_files %{project_root}/lib/views/*_eml.ml))
- (action
-  (with-stdout-to
-   %{null}
-   (progn
-    (run
-     npx
-     tailwindcss
-     -c
-     ../assets/tailwind.config.js
-     -i
-     ../assets/tailwind.css
-     -o
-     app.css)
-    (run ocaml-crunch -m plain ./ -o %{target})))))

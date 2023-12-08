@@ -3,7 +3,7 @@
 
 module.exports = {
   content: [
-    "./**/*_eml.ml"
+    "lib/views/**/*_eml.ml"
   ],
   theme: {
     extend: {
