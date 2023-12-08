@@ -39,3 +39,8 @@ let error_to_string = function
   | `Request_rejected e -> Caqti_error.show (`Request_rejected e)
   | `Response_failed e -> Caqti_error.show (`Response_failed e)
   | `Response_rejected e -> Caqti_error.show (`Response_rejected e)
+
+let decode_1 (v1, ()) = v1
+let decode_2 (v1, (v2, ())) = (v1, v2)
+let decode_3 (v1, (v2, (v3, ()))) = (v1, v2, v3)
+let decode_4 (v1, (v2, (v3, (v4, ())))) = (v1, v2, v3, v4)

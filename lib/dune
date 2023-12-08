@@ -1,5 +1,6 @@
 (library
  (name fsocaml)
+ (modules router tailwindcss)
  (libraries dream controllers views))
 
 (rule

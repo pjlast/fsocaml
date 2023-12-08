@@ -23,4 +23,9 @@
  (tags
   (topics "to describe" your project)))
 
+(package
+ (name ppx_combust)
+ (synopsis "Generate boilerplate stuff for petrol to go zoom zoom")
+ (depends ocaml ppxlib))
+
 ; See the complete stanza docs at https://dune.readthedocs.io/en/stable/dune-files.html#dune-project

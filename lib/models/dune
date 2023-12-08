@@ -1,4 +1,4 @@
 (library
  (name models)
- (libraries dream petrol db)
- (preprocess (pps lwt_ppx)))
+ (libraries dream base petrol db)
+ (preprocess (pps lwt_ppx ppx_combust)))

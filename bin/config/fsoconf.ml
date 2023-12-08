@@ -1,12 +1,15 @@
 (** This module is used to configure your FSOCaml project. *)
 open Base
 
+type environment = Dev | Prod
+
 (** Determines the environment your project is running in. If FSO_ENV is unset,
     a dev environment is assumed. *)
 let env =
-  match Sys.getenv "FSO_ENV" with
-  | Some e -> e
-  | None -> "dev"
+  match Sys.getenv "FSO_ENV" |> Option.value ~default:"dev" with
+  | "dev" -> Dev
+  | "prod" -> Prod
+  | e -> failwith ("Invalid environment " ^ e)
 
 type db_params = {
   username : string;
@@ -48,25 +51,26 @@ let port =
     [DATABASE_URL] environment variable. Otherwise a database connection string
     is built using [db_params]. *)
 let sql_url =
-  if env |> String.equal "dev" then
-    conn_url db_params
-  else
-    Sys.getenv "DATABASE_URL"
-    |> Option.value_exn ~message:"environment variable DATABASE_URL is missing"
+  match env with
+  | Dev -> conn_url db_params
+  | Prod ->
+      Sys.getenv "DATABASE_URL"
+      |> Option.value_exn
+           ~message:"environment variable DATABASE_URL is missing"
 
 let sql_pool_size =
-  if env |> String.equal "dev" then
-    db_params.pool_size
-  else
-    Sys.getenv "POOL_SIZE"
-    |> Option.map ~f:Int.of_string
-    |> Option.value ~default:10
+  match env with
+  | Dev -> db_params.pool_size
+  | Prod ->
+      Sys.getenv "POOL_SIZE"
+      |> Option.map ~f:Int.of_string
+      |> Option.value ~default:10
 
 (** A secret key used to sign sessions. In any environment other than ["dev"],
     the [SECRET_KEY] environment variable must be set. *)
 let secret_key =
-  if env |> String.equal "dev" then
-    "3X71hxtzZBO+MNVDiUpVUNevxRru2N8vtI3DHTUW6gPMtcdq+pyGmVeh8DrPvHn3"
-  else
-    Sys.getenv "SECRET_KEY"
-    |> Option.value_exn ~message:"environment variable SECRET_KEY is missing"
+  match env with
+  | Dev -> "3X71hxtzZBO+MNVDiUpVUNevxRru2N8vtI3DHTUW6gPMtcdq+pyGmVeh8DrPvHn3"
+  | Prod ->
+      Sys.getenv "SECRET_KEY"
+      |> Option.value_exn ~message:"environment variable SECRET_KEY is missing"
