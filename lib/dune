@@ -1,4 +1,4 @@
 (library
  (name fsocaml)
  (modules router)
- (libraries dream controllers views))
+ (libraries dream dream-livereload controllers views))

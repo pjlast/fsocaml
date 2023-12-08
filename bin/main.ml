@@ -17,4 +17,5 @@ let () =
   @@ Dream.logger
   @@ Dream.sql_pool ~size:Fsoconf.sql_pool_size Fsoconf.sql_url
   @@ Dream.sql_sessions
+  @@ Dream_livereload.inject_script ()
   @@ Dream.router Fsocaml.Router.router
