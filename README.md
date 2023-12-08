@@ -6,30 +6,26 @@
 
 This is an opinionated template repository to get up and running with a full-stack OCaml web application. It's basically just Dream, but with some pre-configured setup to take some of the thought out of it.
 
-## TODO
+## About
 
-- [x] Figure out a pattern for routing
-  - Separate file for routing in `lib/router.ml`. Keeps all the application code in `lib/`. Call out to controllers to handle routs. No code in the router itself.
-- [x] Figure out a pattern for HTML templating
-  - Settled on simply using the Dream .eml templates. Not a big fan of the tooling around it. Currently using .html extension so that the LSP doesn't shout at me.
-- [x] Figure out a pattern for database interactions
-  - Will probably use Petrol with some adjustments.
-- [x] Figure out a pattern for database migrations
-  - Went with a custom CLI tool
-- [ ] Figure out a testing strategy
-- [ ] Automate project naming?
+This project is heavily inspired by Elixir Phoenix/Ruby on Rails. It also follows the same Model View Controller (MVC) setup and the "convention over configuration" mindset. The idea is that adding features to your project should be a no-brainer. Database access functions go into `lib/models`, HTML rendering goes into `lib/views`, routing goes into `lib/router.ml`, the handling of routes goes into `lib/controllers`.
+
+Hopefully this eliminates the decision fatigue around the trivial stuff, and lets you focus on simply building what you want to build.
 
 ## Getting started
 
 ### Dependencies
 
-First things first: this project uses a [fork](https://github.com/pjlast/petrol) of a [fork](https://github.com/tjdevries/petrol) of [Petrol](https://github.com/Gopiandcode/petrol). This might get consolidated at some point, but I wanted to iterate fast, so I found it easier to just fork the repo. So you'll first need to clone and install the fork:
+First things first: this project uses a [fork](https://github.com/pjlast/petrol) of a [fork](https://github.com/tjdevries/petrol) of [Petrol](https://github.com/Gopiandcode/petrol). This might get consolidated at some point, but I wanted to iterate fast, so I found it easier to just fork the repo. So you'll first need to pin your petrol version to this repo:
 
 ```bash
-git clone https://github.com/pjlast/petrol.git
-cd petrol
-dune build
-opam install .
+opam pin petrol 'https://github.com/pjlast/petrol.git#master'
+```
+
+This project also uses Tailwind, so you'll need to have npm installed, and then install `tailwindcss`:
+
+```bash
+npm install -D tailwindcss
 ```
 
 ### Setup
@@ -44,9 +40,20 @@ cd myproject
 opam install . --deps-only
 ```
 
-After that you'll need to rename all parts of the project to your new project name. Search for all occurances of `fsocaml` and `Fsocaml` and replace it with `myproject` and `Myproject`.
+After that you'll need to rename all parts of the project to your new project name. Search for all occurances of `fsocaml` and `Fsocaml` and replace it with `myproject` and `Myproject` (or whatever you named your project).
+
+I'll add a script that automates this eventually.
 
 ## Running the project
+
+Before you can run the project, you'll need to set up your database. FSOCaml assumes there's a Postgres instance running and that there is a `postgres` user with the password `postgres`. You can adjust these settings in `bin/config/fsoconf.ml`. In the `db_params` record, adjust the parameters as desired.
+
+Once you've configured your DB paramaters to your liking, you'll have to create the database and run any existing migrations:
+
+```bash
+dune exec migrate create
+dune exec migrate up
+```
 
 Start the project by running
 
@@ -54,18 +61,29 @@ Start the project by running
 dune exec myproject -w
 ```
 
-This will start the server with reloading enabled. Whenever you change a source file, the project will be recompiled and executed.
+This will start the server with live-reloading enabled. Whenever you change a source file, the project will be recompiled and executed, and any open tabs will be reloaded.
 
-## About
+## Expanding your project
 
-This project is heavily inspired by Elixir Phoenix/Ruby on Rails. It also follows the same Model View Controller (MVC) setup and the "convention over configuration" mindset. The idea is that adding features to your project should be a no-brainer. Database access functions go into `lib/models`, HTML rendering goes into `lib/views`, routing goes into `lib/router.ml`, the handling of routes goes into `lib/controllers`.
+The project is set up in a way so that most of the work you'll be doing is in the `lib` directory.
 
-Hopefully this eliminates the decision fatigue around the trivial stuff, and lets you focus on simply building what you want to build.
+You can add new routes in `lib/router.ml`.
+
+Route handlers are added to `lib/controllers`.
+
+Views to render are added to `lib/views` and uses a PPX to render Dream's `.eml`.
+
+Database models are added to `lib/models`. More info on this to come later.
 
 ## Database migrations
 
 FSOCaml has a CLI tool to manage database migrations.
 
+To create a new database:
+
+```bash
+dune exec migrate create
+```
 
 To create a new migration:
 
