@@ -1,5 +1,6 @@
 open Base
 
+(** Recompiles the Tailwind CSS file. *)
 let run_tailwind () =
   let cmd =
     "npx tailwindcss -c tailwind.config.js -i assets/tailwind.css -o \

@@ -37,6 +37,7 @@ git clone --depth=1 --branch=main git@github.com:pjlast/fsocaml.git myproject
 rm -rf ./myproject/.git
 
 cd myproject
+opam update
 opam install . --deps-only
 ```
 
