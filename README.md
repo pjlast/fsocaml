@@ -238,7 +238,7 @@ This will create an `up.sql` and a `down.sql` file under each `migrations/` fold
 CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
     email TEXT NOT NULL UNIQUE,
-    hashed_password TEXT NOT NULL,
+    hashed_password TEXT NOT NULL
 );
 ```
 
@@ -258,7 +258,7 @@ Then, for the `users_tokens` table:
 CREATE TABLE IF NOT EXISTS users_tokens (
     id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users NOT NULL,
-    token TEXT NOT NULL UNIQUE,
+    token TEXT NOT NULL UNIQUE
 );
 ```
 
@@ -309,7 +309,9 @@ Next, let's add functions to create a user as well as fetch a user by email and 
 
 ```ocaml
 (* lib/models/users.ml *)
-let create db email password =
+let create email password db =
+  let open Petrol in
+  let open Petrol.Postgres in
   let hashed_password = password |> hash_password in
 
   Query.insert ~into:table
@@ -318,7 +320,9 @@ let create db email password =
   |> Db.find db
   |> Lwt_result.map decode
 
-let get_by_email_and_password db email password =
+let get_by_email_and_password email password db =
+  let open Petrol in
+  let open Petrol.Postgres in
   let user =
     Query.select fields ~from:table
     |> Query.where Expr.(f_email = s email)
@@ -358,14 +362,13 @@ let rand_str len =
 
   String.of_bytes (Buffer.to_bytes buf)
 
-let create db user_id =
+let create user_id db =
   Query.insert ~into:table
     ~values:
       Expr.
         [
           f_user_id := i user_id;
           f_token := s (rand_str 32);
-          f_context := s "session";
         ]
     ~returning:fields
   |> Db.find db
@@ -376,7 +379,9 @@ With the `users_tokens` model created, we can navigate back to `users.ml` and ad
 
 ```ocaml
 (* lib/models/users.ml *)
-let get_by_session_token db ~token =
+let get_by_session_token ~token db =
+  let open Petrol in
+  let open Petrol.Postgres in
   Query.select fields ~from:table
   |> Query.join
        (Query.table Users_tokens.table)
@@ -413,7 +418,7 @@ Pretty straightforward. Read the form contents, try to create a user, respond ap
 (* lib/controllers/user_login.ml *)
 let sign_in_user req user_id =
   Dream.sql req (fun db ->
-      let%lwt token_res = Models.Users_tokens.create db user_id in
+      let%lwt token_res = Models.Users_tokens.create user_id db in
 
       match token_res with
       | Error err ->
@@ -428,7 +433,7 @@ let create req =
       match%lwt Dream.form req with
       | `Ok [ ("email", email); ("password", password) ] -> (
           let%lwt user_res =
-            Models.Users.get_by_email_and_password db email password
+            Models.Users.get_by_email_and_password email password db
           in
 
           match user_res with
@@ -570,15 +575,12 @@ let render req content =
         <%s! user_component req %>
       </div>
     </header>
-    <main class="px-4 py-20 sm:px-6 lg:px-8">
+    <main class="px-4 py-20 sm:px-6 lg:px-8 bg-cover bg-center h-full" style="background-image: url('/images/background.png')">
       <div class="mx-auto max-w-2xl">
-        <% Dream.flash_messages req |> List.iter (fun (category, text) -> %>
-         <%s! Components_eml.flash ~kind:category text %>
-        <% ); %>
         <%s! content %>
       </div>
     </main>
-  }|
+  |}
 ```
 
 `<%s! user_component req %>` renders our user component. The `!` tells Dream to render the string as HTML, instead of escaping it.

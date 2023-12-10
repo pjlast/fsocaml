@@ -14,7 +14,7 @@ let render _req content =
         </div>
       </div>
     </header>
-    <main class="px-4 py-20 sm:px-6 lg:px-8 bg-cover bg-center" style="background-image: url('/images/background.png')">
+    <main class="px-4 py-20 sm:px-6 lg:px-8 bg-cover bg-center h-full" style="background-image: url('/images/background.png')">
       <div class="mx-auto max-w-2xl">
         <%s! content %>
       </div>

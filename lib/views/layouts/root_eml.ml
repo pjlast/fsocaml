@@ -13,7 +13,7 @@ let render req content =
         <link rel="stylesheet" href="/css/app.css" />
         <script src="https://unpkg.com/htmx.org@1.9.9"></script>
       </head>
-      <body class="bg-white antialiased" hx-boost="true">
+      <body class="bg-white antialiased h-[100vh]" hx-boost="true">
         <%s! content %>
       </body>
     </html>|}

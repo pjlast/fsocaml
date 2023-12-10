@@ -1,5 +1,5 @@
 (library
  (name layouts)
- (libraries dream)
+ (libraries dream middleware)
  (preprocess
   (pps ppx_dream_eml)))
