@@ -1,6 +1,8 @@
 _build
 _opam
 
+assets/css/app.css
+
 .DS_Store
 
 profile.dump
