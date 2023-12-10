@@ -1,6 +1,6 @@
 let render =
   {%eml|
-    <div class="bg-cover bg-center h-[100vh] px-4 py-10 sm:px-6 sm:py-28 lg:px-8 xl:px-28 xl:py-32" style="background-image: url('/images/background.png')">
+    <div class="h-[100vh] px-4 py-10 sm:px-6 sm:py-28 lg:px-8 xl:px-28 xl:py-32">
       <div class="mx-auto max-w-xl mx-0">
       <img class="h-24" alt="camel logo" src="/images/logo.png" />
         <h1 class="mt-10 flex items-center text-sm font-semibold leading-6">

@@ -11,8 +11,9 @@ let render req content =
           Full-stack OCaml
         </title>
         <link rel="stylesheet" href="/css/app.css" />
+        <script src="https://unpkg.com/htmx.org@1.9.9"></script>
       </head>
-      <body class="bg-white antialiased">
+      <body class="bg-white antialiased" hx-boost="true">
         <%s! content %>
       </body>
     </html>|}

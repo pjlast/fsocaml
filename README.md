@@ -104,7 +104,7 @@ To run all downward migrations:
 dune exec migrate down
 ```
 
-## Tutorial
+## Tutorial - Adding user accounts
 
 Let's extend the base app to allow a user to create an account and sign in.
 

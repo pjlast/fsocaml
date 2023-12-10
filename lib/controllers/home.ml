@@ -1,2 +1,2 @@
 let index req =
-  Views.Home_eml.render |> Layouts.Root_eml.render req |> Dream.html
+  Views.Home_eml.render |> Layouts.App_eml.render req |> Page.render req
