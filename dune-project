@@ -25,6 +25,8 @@
 
 (package
  (name ppx_combust)
+ (authors "TJ DeVries" "Petri-Johan Last")
+ (maintainers "TJ DeVries" "Petri-Johan Last")
  (synopsis "Generate boilerplate stuff for petrol to go zoom zoom")
  (depends ocaml ppxlib))
 
