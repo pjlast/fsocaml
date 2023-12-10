@@ -114,7 +114,7 @@ We'll break this down into several tasks and implement it step by step:
 - Create the required database migrations
 - Add the models
 - Create routes to register, sign in, and sign out
-- Hook it all up and round it off
+- Add middleware and render conditionally
 
 ### Add the register and login views
 
