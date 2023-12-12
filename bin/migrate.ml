@@ -40,6 +40,7 @@ let execute_qry sql =
 (* Use the pool to execute queries *)
 
 let migrate_up_all () =
+  Core_unix.mkdir_p "migrations" |> ignore;
   let dir = Core_unix.opendir "migrations" in
   let dirs = collect_dirs dir in
   dirs
