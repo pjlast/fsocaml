@@ -102,7 +102,9 @@ let () =
   Clap.close ();
 
   let _ = Option.value dbname ~default:"fsocaml_dev" in
-  let projname' = String.lowercase (Option.value projname ~default:"fsocaml") in
+  let cwd = Core_unix.getcwd () |> String.split ~on:'/' |> List.last in
+  let default_projname = Option.value cwd ~default:"fsocaml" in
+  let projname' = String.lowercase (Option.value projname ~default:default_projname) in
 
   List.iter dune_files ~f:(fun file -> patch_sfile file "fsocaml" projname');
 

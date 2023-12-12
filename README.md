@@ -43,7 +43,19 @@ opam install . --deps-only
 
 After that you'll need to rename all parts of the project to your new project name. Search for all occurances of `fsocaml` and `Fsocaml` and replace it with `myproject` and `Myproject` (or whatever you named your project).
 
-I'll add a script that automates this eventually.
+You can do this manually or by running
+
+```bash
+dune exec setup
+```
+
+which will use the name of the project folder as the project name, or
+
+```bash
+dune exec setup newproject
+```
+
+which can be used to give at a different name.
 
 ## Running the project
 
