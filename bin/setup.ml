@@ -27,7 +27,7 @@ let pp_sexp s =
     | Sexp.Atom a -> pp_atom a
     | Sexp.List l ->
         let nl = if f then "" else "\n" in
-        let prefix = sprintf "%s%s(" nl (indent i) in
+        let prefix = sprintf "%s%s(" nl (indent (i * 2)) in
         let ls = List.foldi l ~init:"" ~f:(fun j acc s'' -> 
           let sp = if j = 0 then "" else " " in
           acc ^ sp ^ (loop s'' (i + 1) false)
