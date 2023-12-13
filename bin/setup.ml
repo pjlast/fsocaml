@@ -77,10 +77,6 @@ let patch_mlfile filename from into =
     Out_channel.output_string file f
   )
 
-let capitalize str =
-  let first = String.get str 0 in
-  let rest = String.sub str ~pos:1 ~len:(String.length str - 1) in
-  Char.to_string (Char.uppercase first) ^ rest;;
 
 let () =
   Clap.description "Set up a new fsocaml project.";
