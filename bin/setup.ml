@@ -48,10 +48,6 @@ let sexp_patch s ~from ~into =
       ))
   in loop s true
 
-let sexp_list_patch sl from into =
-  List.map sl ~f:(fun s ->
-    sexp_patch s from into
-  )
 
 let patch_sfile filename from into =
   let sl = Sexp.load_sexps filename in
