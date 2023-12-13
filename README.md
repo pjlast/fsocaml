@@ -301,7 +301,7 @@ type t = {
 [@@deriving combust ~name:"users"]
 ```
 
-We use a preprocessor called `combust` initially created by TJ DeVries to generate the required boilerplate to interface with Petrol, the ORM we'll be using.
+We use a preprocessor called `combust` initially created by [TJ DeVries](https://github.com/tjdevries) to generate the required boilerplate to interface with [Petrol](https://ocaml.org/p/petrol/latest/doc/index.html), the ORM we'll be using.
 
 In order to create a user and sign in, we'll need to be able to hash their password and verify a password. Let's create some functions for those first:
 

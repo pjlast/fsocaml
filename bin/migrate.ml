@@ -106,7 +106,7 @@ let () =
   in
   match command with
   | `new_migration name ->
-      Stdio.print_endline ("Migration create at " ^ new_migration name)
+      Stdio.print_endline ("Migration created at " ^ new_migration name)
   | `up -> migrate_up_all ()
   | `down -> migrate_down_all ()
   | `create -> create_db ()
