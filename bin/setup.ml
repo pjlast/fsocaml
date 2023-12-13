@@ -37,7 +37,7 @@ let pp_sexp s =
 
 (** Scan an S-expression and replace all instances of `from` with `into`,
     except for labels (the first atom in a list). *)
-let sexp_patch s from into =
+let sexp_patch s ~from ~into =
   let rec loop s' label  =
     match s', label with
     | Sexp.Atom a, false when (String.equal a from) -> Sexp.Atom into
