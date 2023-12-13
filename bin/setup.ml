@@ -64,18 +64,12 @@ let patch_sfile filename from into =
   )
 
 (** Scan lines in a source code file and replace all instances of `from` with `into`. *)
-let patch_mlfile filename from into =
-  let f = (In_channel.with_file filename ~f:(fun file ->
-      In_channel.input_lines file
-    )
-    |> List.map ~f:(fun line ->
-      String.substr_replace_all line ~pattern:from ~with_:into
-    )
-    |> String.concat ~sep:"\n"
-  ) in
-  Out_channel.with_file filename ~f:(fun file ->
-    Out_channel.output_string file f
-  )
+let patch_mlfile filename ~from ~into =
+  let data =
+    In_channel.read_all filename
+    |> String.substr_replace_all ~pattern:from ~with_:into
+  in
+  Out_channel.write_all filename ~data
 
 
 let () =
