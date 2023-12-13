@@ -104,7 +104,7 @@ let () =
 
   List.iter dune_files ~f:(fun file -> patch_sfile file "fsocaml" projname');
 
-  let projname'' = capitalize projname' in
+  let projname'' = String.capitalize projname' in
   patch_mlfile "bin/main.ml" "Fsocaml.Router.router" (projname'' ^ ".Router.router");
 
   printf "%d files were patched.\n" ((List.length dune_files) + 1);
