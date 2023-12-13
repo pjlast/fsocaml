@@ -219,14 +219,16 @@ let new_ req =
 Finally, update `lib/router.ml` so we're able to navigate to these routes:
 
 ```ocaml
-          (* ... *)
+        (* ... *)
+        [
           get "/" @@ Controllers.Home.index;
           scope "/users" []
             [
               get "/register" @@ Controllers.User_registration.new_;
               get "/login" @@ Controllers.User_login.new_;
             ];
-          (* ... *)
+        ];
+        (* ... *)
 ```
 
 If we start the app up again with `dune exec fsocaml -w` and navigate to `/users/register` and `/users/login`, we should see our newly created pages.
