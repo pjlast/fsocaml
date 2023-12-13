@@ -50,14 +50,12 @@ let sexp_patch s ~from ~into =
 
 
 let patch_sfile filename from into =
-  let sl = Sexp.load_sexps filename in
-  let f = (sexp_list_patch sl from into
+  let f =
+    Sexp.load_sexps filename
+    |> List.map ~f:(sexp_patch ~from ~into)
     |> List.map ~f:pp_sexp
-    |> String.concat ~sep:"\n"
-  ) in
-  Out_channel.with_file filename ~f:(fun file ->
-    Out_channel.output_string file f
-  )
+  in
+  Out_channel.write_lines filename f
 
 (** Scan lines in a source code file and replace all instances of `from` with `into`. *)
 let patch_mlfile filename ~from ~into =
