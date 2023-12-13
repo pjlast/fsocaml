@@ -65,8 +65,7 @@ let migrate_down_all () =
 let create_db () =
   let fn =
     let sql =
-      Stdlib.Format.sprintf {|CREATE DATABASE %s;|}
-        Fsoconf.db_params.database
+      Stdlib.Format.sprintf {|CREATE DATABASE %s;|} Fsoconf.db_params.database
     in
     let open Lwt_result.Syntax in
     let open Caqti_request.Infix in

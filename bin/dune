@@ -1,20 +1,38 @@
 (executable
-  (public_name fsocaml)
-  (name main)
-  (modules main)
-  (package fsocaml)
-  (libraries fsocaml fsoconf base stdio dream caqti-driver-postgresql caqti-lwt petrol models db dream-livereload))
+ (public_name fsocaml)
+ (name main)
+ (modules main)
+ (package fsocaml)
+ (libraries
+  fsocaml
+  fsoconf
+  base
+  stdio
+  dream
+  caqti-driver-postgresql
+  caqti-lwt
+  petrol
+  models
+  db
+  dream-livereload))
 
 (executable
-  (public_name migrate)
-  (name migrate)
-  (modules migrate)
-  (package fsocaml)
-  (libraries fsocaml fsoconf clap base core_unix stdio caqti-driver-postgresql))
+ (public_name migrate)
+ (name migrate)
+ (modules migrate)
+ (package fsocaml)
+ (libraries
+  fsocaml
+  fsoconf
+  clap
+  base
+  core_unix
+  stdio
+  caqti-driver-postgresql))
 
 (executable
-  (public_name setup)
-  (name setup)
-  (modules setup)
-  (package fsocaml)
-  (libraries clap core core_unix))
+ (public_name setup)
+ (name setup)
+ (modules setup)
+ (package fsocaml)
+ (libraries clap core core_unix))
