@@ -366,13 +366,7 @@ type t = {
 [@@deriving combust ~name:"users_tokens"]
 
 let rand_str len =
-  Random.self_init ();
-  let buf = Buffer.create len in
-  for _ = 0 to len - 1 do
-    Buffer.add_char buf (Char.chr (32 + Random.int 94))
-  done;
-
-  String.of_bytes (Buffer.to_bytes buf)
+  String.init len (fun _ -> Char.chr (33 + Random.int 94))
 
 let create user_id db =
   Query.insert ~into:table
