@@ -1,4 +1,5 @@
 (library
  (name controllers)
  (libraries dream views ppx_dream_eml models)
- (preprocess (pps ppx_dream_eml lwt_ppx)))
+ (preprocess
+  (pps ppx_dream_eml lwt_ppx)))

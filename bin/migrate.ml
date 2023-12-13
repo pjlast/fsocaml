@@ -40,6 +40,7 @@ let execute_qry sql =
 (* Use the pool to execute queries *)
 
 let migrate_up_all () =
+  Core_unix.mkdir_p "migrations" |> ignore;
   let dir = Core_unix.opendir "migrations" in
   let dirs = collect_dirs dir in
   dirs
@@ -64,8 +65,7 @@ let migrate_down_all () =
 let create_db () =
   let fn =
     let sql =
-      Stdlib.Format.sprintf {|CREATE DATABASE %s;|}
-        Fsoconf.db_params.database
+      Stdlib.Format.sprintf {|CREATE DATABASE %s;|} Fsoconf.db_params.database
     in
     let open Lwt_result.Syntax in
     let open Caqti_request.Infix in
