@@ -6,3 +6,5 @@ assets/css/app.css
 .DS_Store
 
 profile.dump
+package-lock.json
+package.json

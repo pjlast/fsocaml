@@ -337,14 +337,10 @@ let create email password db =
 let get_by_email_and_password email password db =
   let open Petrol in
   let open Petrol.Postgres in
-  let user =
-    Query.select fields ~from:table
-    |> Query.where Expr.(f_email = s email)
-    |> Db.find_opt db
-    |> Lwt_result.map (Option.map decode)
-  in
-
-  user
+  Query.select fields ~from:table
+  |> Query.where Expr.(f_email = s email)
+  |> Db.find_opt db
+  |> Lwt_result.map (Option.map decode)
   |> Lwt_result.map (fun user ->
          Option.bind user (verify_user_password ~password))
 ```
