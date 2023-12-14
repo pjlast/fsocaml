@@ -366,6 +366,7 @@ type t = {
 [@@deriving combust ~name:"users_tokens"]
 
 let rand_str len =
+  Random.self_init ();
   String.init len (fun _ -> Char.chr (33 + Random.int 94))
 
 let create user_id db =

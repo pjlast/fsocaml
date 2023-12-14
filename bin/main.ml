@@ -15,8 +15,6 @@ let () =
   if Poly.( = ) Fsoconf.env Fsoconf.Dev then
     Dream.initialize_log ~level:`Debug ();
 
-  Random.self_init ();
-
   Dream.run ~interface:Fsoconf.host ~port:Fsoconf.port ~adjust_terminal:false
     ~error_handler:Dream.debug_error_handler
   @@ Dream.set_secret Fsoconf.secret_key
