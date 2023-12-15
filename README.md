@@ -32,7 +32,7 @@ rm -rf ./myproject/.git
 
 cd myproject
 opam update
-opam install . --deps-only --locked
+opam install . --deps-only
 ```
 
 After that you'll need to rename all parts of the project to your new project name. Search for all occurances of `fsocaml` and `Fsocaml` and replace it with `myproject` and `Myproject` (or whatever you named your project).

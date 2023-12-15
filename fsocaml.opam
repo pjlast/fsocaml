@@ -33,3 +33,6 @@ build: [
   ]
 ]
 dev-repo: "git+https://github.com/username/reponame.git"
+pin-depends: [
+  ["petrol.1.2.4" "https://github.com/pjlast/petrol.git#1.2.4"]
+]
