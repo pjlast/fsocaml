@@ -19,7 +19,7 @@
  (name fsocaml)
  (synopsis "A short synopsis")
  (description "A longer description")
- (depends ocaml dune dream dream-livereload petrol ppx_dream_eml)
+ (depends ocaml dune dream dream-livereload (petrol (= 1.2.4)) ppx_dream_eml)
  (tags
   (topics "to describe" your project)))
 
