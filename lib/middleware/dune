@@ -1,5 +1,5 @@
 (library
  (name middleware)
- (libraries dream-pure models)
+ (libraries dream models mailer)
  (preprocess
   (pps lwt_ppx)))
