@@ -10,6 +10,10 @@
 open Core
 
 let dune_files = [ "dune-project"; "test/dune"; "lib/dune"; "bin/dune" ]
+
+let rename_files =
+  [ "fsocaml.opam"; "fsocaml.opam.template"; "test/fsocaml.ml" ]
+
 let indent n = String.init n ~f:(fun _ -> ' ')
 
 let pp_atom a =
@@ -108,4 +112,14 @@ let () =
   patch_mlfile "bin/main.ml" ~from:"Fsocaml.Router.router"
     ~into:(projname'' ^ ".Router.router");
 
-  printf "%d files were patched.\n" (List.length dune_files + 1)
+  printf "%d files were patched.\n" (List.length dune_files + 1);
+
+  rename_files
+  |> List.iter ~f:(fun oldpath ->
+         let newpath =
+           oldpath
+           |> String.substr_replace_all ~pattern:"fsocaml" ~with_:projname'
+         in
+         Core_unix.rename ~src:oldpath ~dst:newpath);
+
+  printf "%d files were renamed.\n" (List.length rename_files)

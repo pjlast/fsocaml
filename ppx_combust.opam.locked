@@ -1,0 +1,30 @@
+opam-version: "2.0"
+name: "ppx_combust"
+version: "~dev"
+synopsis: "Generate boilerplate stuff for petrol to go zoom zoom"
+maintainer: ["TJ DeVries" "Petri-Johan Last"]
+authors: ["TJ DeVries" "Petri-Johan Last"]
+license: "LICENSE"
+homepage: "https://github.com/username/reponame"
+doc: "https://url/to/documentation"
+bug-reports: "https://github.com/username/reponame/issues"
+depends: [
+  "dune" {= "3.11.1"}
+  "ocaml" {= "5.1.0"}
+  "ppxlib" {= "0.31.0"}
+]
+build: [
+  ["dune" "subst"] {dev}
+  [
+    "dune"
+    "build"
+    "-p"
+    name
+    "-j"
+    jobs
+    "@install"
+    "@runtest" {with-test}
+    "@doc" {with-doc}
+  ]
+]
+dev-repo: "git+https://github.com/username/reponame.git"

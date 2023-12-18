@@ -16,12 +16,6 @@ Hopefully this eliminates the decision fatigue around the trivial stuff, and let
 
 ### Dependencies
 
-First things first: this project uses a [fork](https://github.com/pjlast/petrol) of a [fork](https://github.com/tjdevries/petrol) of [Petrol](https://github.com/Gopiandcode/petrol). This might get consolidated at some point, but I wanted to iterate fast, so I found it easier to just fork the repo. So you'll first need to pin your petrol version to this repo:
-
-```bash
-opam pin petrol 'https://github.com/pjlast/petrol.git#master'
-```
-
 This project also uses Tailwind, so you'll need to have npm installed, and then install `tailwindcss`:
 
 ```bash
@@ -366,15 +360,10 @@ type t = {
   token : string;
 }
 [@@deriving combust ~name:"users_tokens"]
+let _ = Random.self_init ()
 
 let rand_str len =
-  Random.self_init ();
-  let buf = Buffer.create len in
-  for _ = 0 to len - 1 do
-    Buffer.add_char buf (Char.chr (32 + Random.int 94))
-  done;
-
-  String.of_bytes (Buffer.to_bytes buf)
+  String.init len (fun _ -> Char.chr (33 + Random.int 94))
 
 let create user_id db =
   Query.insert ~into:table
