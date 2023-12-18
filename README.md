@@ -362,6 +362,7 @@ type t = {
   token : string;
 }
 [@@deriving combust ~name:"users_tokens"]
+
 let _ = Random.self_init ()
 
 let rand_str len =
@@ -460,7 +461,7 @@ let delete req =
   Dream.redirect req ~status:`See_Other "/users/login"
 ```
 
-This one's a little more complicated. We have a helper function that creates a token for the provided users ID and sets it in the current session.
+This one's a little more complicated. We have a helper function that creates a token for the provided user's ID and sets it in the current session.
 
 The `create` function reads the form as before, fetches the user with the corresponding email and password, and then signs in that user.
 
