@@ -2,4 +2,4 @@
  (name layouts)
  (libraries dream middleware)
  (preprocess
-  (pps ppx_dream_eml)))
+  (pps embedded_ocaml_templates.ppx_eml)))
