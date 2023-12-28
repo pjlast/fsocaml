@@ -15,13 +15,13 @@ depends: [
   "dream"
   "dream-livereload"
   "petrol" {= "1.2.4"}
-  "ppx_dream_eml"
   "core_unix"
   "clap"
   "caqti-driver-postgresql"
   "safepass"
   "ppx_deriving"
   "letters"
+  "embedded_ocaml_templates"
   "odoc" {with-doc}
 ]
 build: [

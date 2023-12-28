@@ -19,7 +19,7 @@
  (name fsocaml)
  (synopsis "A short synopsis")
  (description "A longer description")
- (depends ocaml dune dream dream-livereload (petrol (= 1.2.4)) ppx_dream_eml core_unix clap caqti-driver-postgresql safepass ppx_deriving letters)
+ (depends ocaml dune dream dream-livereload (petrol (= 1.2.4)) core_unix clap caqti-driver-postgresql safepass ppx_deriving letters embedded_ocaml_templates)
  (tags
   (topics "to describe" your project)))
 

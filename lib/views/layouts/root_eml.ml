@@ -5,7 +5,7 @@ let render req content =
       <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="csrf-token" content="<%s Dream.csrf_token req %>" />
+        <meta name="csrf-token" content="<%- Dream.csrf_token req %>" />
         <meta name="description" content="Full-stack OCaml, baby!" />
         <title>
           Full-stack OCaml
@@ -14,6 +14,6 @@ let render req content =
         <script src="https://unpkg.com/htmx.org@1.9.9"></script>
       </head>
       <body class="bg-white antialiased h-[100vh]" hx-boost="true">
-        <%s! content %>
+        <%- content %>
       </body>
     </html>|}
