@@ -16,6 +16,12 @@ depends: [
   "dream-livereload"
   "petrol" {= "1.2.4"}
   "ppx_dream_eml"
+  "core_unix"
+  "clap"
+  "caqti-driver-postgresql"
+  "safepass"
+  "ppx_deriving"
+  "letters"
   "odoc" {with-doc}
 ]
 build: [
@@ -34,5 +40,5 @@ build: [
 ]
 dev-repo: "git+https://github.com/username/reponame.git"
 pin-depends: [
-  ["petrol.1.2.4" "https://github.com/pjlast/petrol.git#1.2.4"]
+  ["petrol.1.2.4" "git+https://github.com/pjlast/petrol.git#1.2.4"]
 ]
