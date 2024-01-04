@@ -19,7 +19,7 @@
  (name fsocaml)
  (synopsis "A short synopsis")
  (description "A longer description")
- (depends ocaml dune dream dream-livereload petrol ppx_dream_eml)
+ (depends ocaml dune dream dream-livereload (petrol (= 1.2.4)) core_unix clap caqti-driver-postgresql safepass ppx_deriving letters embedded_ocaml_templates)
  (tags
   (topics "to describe" your project)))
 
@@ -28,6 +28,6 @@
  (authors "TJ DeVries" "Petri-Johan Last")
  (maintainers "TJ DeVries" "Petri-Johan Last")
  (synopsis "Generate boilerplate stuff for petrol to go zoom zoom")
- (depends ocaml ppxlib))
+ (depends ocaml ppxlib ppx_deriving))
 
 ; See the complete stanza docs at https://dune.readthedocs.io/en/stable/dune-files.html#dune-project

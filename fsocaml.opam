@@ -14,8 +14,14 @@ depends: [
   "dune" {>= "3.11"}
   "dream"
   "dream-livereload"
-  "petrol"
-  "ppx_dream_eml"
+  "petrol" {= "1.2.4"}
+  "core_unix"
+  "clap"
+  "caqti-driver-postgresql"
+  "safepass"
+  "ppx_deriving"
+  "letters"
+  "embedded_ocaml_templates"
   "odoc" {with-doc}
 ]
 build: [
@@ -33,3 +39,6 @@ build: [
   ]
 ]
 dev-repo: "git+https://github.com/username/reponame.git"
+pin-depends: [
+  ["petrol.1.2.4" "git+https://github.com/pjlast/petrol.git#1.2.4"]
+]

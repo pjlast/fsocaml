@@ -16,12 +16,6 @@ Hopefully this eliminates the decision fatigue around the trivial stuff, and let
 
 ### Dependencies
 
-First things first: this project uses a [fork](https://github.com/pjlast/petrol) of a [fork](https://github.com/tjdevries/petrol) of [Petrol](https://github.com/Gopiandcode/petrol). This might get consolidated at some point, but I wanted to iterate fast, so I found it easier to just fork the repo. So you'll first need to pin your petrol version to this repo:
-
-```bash
-opam pin petrol 'https://github.com/pjlast/petrol.git#master'
-```
-
 This project also uses Tailwind, so you'll need to have npm installed, and then install `tailwindcss`:
 
 ```bash
