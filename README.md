@@ -139,7 +139,7 @@ let render req =
         </p>
 
       <form class="flex flex-col mt-2" method="POST" action="/users/register">
-        <%s! Dream.csrf_tag req %>
+        <%- Dream.csrf_tag req %>
 
         <label for="email">
         Email
@@ -157,7 +157,7 @@ let render req =
     |}
 ```
 
-`{%eml|...|}` is a preprocessor for Dream's Embedded ML templates. Indentation in these templates are important. The template needs to end on the same indentation level it starts.
+`{%eml|...|}` is a preprocessor directive for embedded ML templates provided by the [embedded_ocaml_templates](https://github.com/EmileTrotignon/embedded_ocaml_templates) library. Indentation in these templates are important. The template needs to end on the same indentation level it starts.
 
 We'll create a similar `user_login_eml.ml` file, except we'll change the words and the links a bit:
 
@@ -174,7 +174,7 @@ let render req =
         </p>
 
       <form class="flex flex-col mt-2" method="POST" action="/users/login">
-        <%s! Dream.csrf_tag req %>
+        <%- Dream.csrf_tag req %>
 
         <label for="email">
         Email
@@ -213,17 +213,19 @@ let new_ req =
 Finally, update `lib/router.ml` so we're able to navigate to these routes:
 
 ```ocaml
-          (* ... *)
+        (* ... *)
+        [
           get "/" @@ Controllers.Home.index;
           scope "/users" []
             [
               get "/register" @@ Controllers.User_registration.new_;
               get "/login" @@ Controllers.User_login.new_;
             ];
-          (* ... *)
+        ];
+        (* ... *)
 ```
 
-If we start the app up again with `dune exec fsocaml -w` and navigate to `/users/register` and `/users/login`, we should see our newly created pages.
+If we start the app up again with `dune exec myproject -w` and navigate to `/users/register` and `/users/login`, we should see our newly created pages.
 
 ### Create the required database migrations
 
@@ -293,7 +295,7 @@ type t = {
 [@@deriving combust ~name:"users"]
 ```
 
-We use a preprocessor called `combust` initially created by TJ DeVries to generate the required boilerplate to interface with Petrol, the ORM we'll be using.
+We use a preprocessor called `combust` initially created by [TJ DeVries](https://github.com/tjdevries) to generate the required boilerplate to interface with [Petrol](https://ocaml.org/p/petrol/latest/doc/index.html), the ORM we'll be using.
 
 In order to create a user and sign in, we'll need to be able to hash their password and verify a password. Let's create some functions for those first:
 
@@ -329,14 +331,10 @@ let create email password db =
 let get_by_email_and_password email password db =
   let open Petrol in
   let open Petrol.Postgres in
-  let user =
-    Query.select fields ~from:table
-    |> Query.where Expr.(f_email = s email)
-    |> Db.find_opt db
-    |> Lwt_result.map (Option.map decode)
-  in
-
-  user
+  Query.select fields ~from:table
+  |> Query.where Expr.(f_email = s email)
+  |> Db.find_opt db
+  |> Lwt_result.map (Option.map decode)
   |> Lwt_result.map (fun user ->
          Option.bind user (verify_user_password ~password))
 ```
@@ -358,6 +356,7 @@ type t = {
   token : string;
 }
 [@@deriving combust ~name:"users_tokens"]
+
 let _ = Random.self_init ()
 
 let rand_str len =
@@ -456,7 +455,7 @@ let delete req =
   Dream.redirect req ~status:`See_Other "/users/login"
 ```
 
-This one's a little more complicated. We have a helper function that creates a token for the provided users ID and sets it in the current session.
+This one's a little more complicated. We have a helper function that creates a token for the provided user's ID and sets it in the current session.
 
 The `create` function reads the form as before, fetches the user with the corresponding email and password, and then signs in that user.
 
@@ -522,7 +521,13 @@ let router () =
   Dream.router
     [
       scope "/"
-        [ Dream.logger; Middleware.user_middleware ]
+        [
+          Dream.logger;
+          Dream.flash;
+          Dream.cookie_sessions;
+          Middleware.mailer_middleware Mailer.dev_mailer;
+          Middleware.user_middleware;
+        ]
         [
           get "/" @@ Controllers.Home.index;
           scope "/users" []
@@ -553,7 +558,7 @@ let user_component req =
   | Some user ->
       {%eml|
     <div class="flex items-center gap-4 font-semibold leading-6 text-zinc-900">
-      <%s user.email %>
+      <%- user.email %>
       <a hx-delete="/users/logout" hx-target="body" hx-push-url="true">Sign out</a>
     </div>|}
 ```
@@ -573,7 +578,7 @@ let render req content =
             <img alt="logo" src="/images/logo.png" width="36" />
           </a>
         </div>
-        <%s! user_component req %>
+        <%- user_component req %>
       </div>
     </header>
     <main class="px-4 py-20 sm:px-6 lg:px-8 bg-cover bg-center h-full" style="background-image: url('/images/background.png')">
@@ -584,6 +589,6 @@ let render req content =
   |}
 ```
 
-`<%s! user_component req %>` renders our user component. The `!` tells Dream to render the string as HTML, instead of escaping it.
+`<%- user_component req %>` renders our user component. The `-` tells the embedded ML preprocessor to render the string as HTML, instead of escaping it.
 
 And that's it! Now we should have a working web app with user registration and sign-in!
