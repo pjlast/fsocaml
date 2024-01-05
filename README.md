@@ -521,7 +521,13 @@ let router () =
   Dream.router
     [
       scope "/"
-        [ Dream.logger; Middleware.user_middleware ]
+        [
+          Dream.logger;
+          Dream.flash;
+          Dream.cookie_sessions;
+          Middleware.mailer_middleware Mailer.dev_mailer;
+          Middleware.user_middleware;
+        ]
         [
           get "/" @@ Controllers.Home.index;
           scope "/users" []
