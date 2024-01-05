@@ -139,7 +139,7 @@ let render req =
         </p>
 
       <form class="flex flex-col mt-2" method="POST" action="/users/register">
-        <%s! Dream.csrf_tag req %>
+        <%- Dream.csrf_tag req %>
 
         <label for="email">
         Email
@@ -157,7 +157,7 @@ let render req =
     |}
 ```
 
-`{%eml|...|}` is a preprocessor for Dream's Embedded ML templates. Indentation in these templates are important. The template needs to end on the same indentation level it starts.
+`{%eml|...|}` is a preprocessor directive for embedded ML templates provided by the [embedded_ocaml_templates](https://github.com/EmileTrotignon/embedded_ocaml_templates) library. Indentation in these templates are important. The template needs to end on the same indentation level it starts.
 
 We'll create a similar `user_login_eml.ml` file, except we'll change the words and the links a bit:
 
@@ -174,7 +174,7 @@ let render req =
         </p>
 
       <form class="flex flex-col mt-2" method="POST" action="/users/login">
-        <%s! Dream.csrf_tag req %>
+        <%- Dream.csrf_tag req %>
 
         <label for="email">
         Email
@@ -225,7 +225,7 @@ Finally, update `lib/router.ml` so we're able to navigate to these routes:
         (* ... *)
 ```
 
-If we start the app up again with `dune exec fsocaml -w` and navigate to `/users/register` and `/users/login`, we should see our newly created pages.
+If we start the app up again with `dune exec myproject -w` and navigate to `/users/register` and `/users/login`, we should see our newly created pages.
 
 ### Create the required database migrations
 
@@ -552,7 +552,7 @@ let user_component req =
   | Some user ->
       {%eml|
     <div class="flex items-center gap-4 font-semibold leading-6 text-zinc-900">
-      <%s user.email %>
+      <%- user.email %>
       <a hx-delete="/users/logout" hx-target="body" hx-push-url="true">Sign out</a>
     </div>|}
 ```
@@ -572,7 +572,7 @@ let render req content =
             <img alt="logo" src="/images/logo.png" width="36" />
           </a>
         </div>
-        <%s! user_component req %>
+        <%- user_component req %>
       </div>
     </header>
     <main class="px-4 py-20 sm:px-6 lg:px-8 bg-cover bg-center h-full" style="background-image: url('/images/background.png')">
@@ -583,6 +583,6 @@ let render req content =
   |}
 ```
 
-`<%s! user_component req %>` renders our user component. The `!` tells Dream to render the string as HTML, instead of escaping it.
+`<%- user_component req %>` renders our user component. The `-` tells the embedded ML preprocessor to render the string as HTML, instead of escaping it.
 
 And that's it! Now we should have a working web app with user registration and sign-in!
