@@ -46,7 +46,7 @@ dune exec setup
 which will use the name of the project folder as the project name, or
 
 ```bash
-dune exec setup newproject
+dune exec setup myproject
 ```
 
 which can be used to give at a different name.
